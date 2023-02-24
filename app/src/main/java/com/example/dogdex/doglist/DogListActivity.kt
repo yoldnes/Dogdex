@@ -8,6 +8,9 @@ import com.example.dogdex.R
 import com.example.dogdex.databinding.ActivityDogListBinding
 
 class DogListActivity : AppCompatActivity() {
+
+    private val adapter = DogAdapter()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityDogListBinding.inflate(layoutInflater)
@@ -16,6 +19,9 @@ class DogListActivity : AppCompatActivity() {
         val dogList = getFakeDogs()
         val recycler = binding.dogRecycler
         recycler.layoutManager = LinearLayoutManager(this)
+        recycler.adapter = adapter
+        adapter.submitList(dogList)
+
     }
 
     private fun getFakeDogs(): MutableList<Dog> {
