@@ -5,8 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.dogdex.Dog
 import com.example.dogdex.databinding.DogListItemBinding
+import kotlinx.coroutines.withContext
 
 class DogAdapter : ListAdapter<Dog, DogAdapter.DogViewHolder>(DiffCalback) {
 
@@ -33,7 +35,15 @@ class DogAdapter : ListAdapter<Dog, DogAdapter.DogViewHolder>(DiffCalback) {
     inner class DogViewHolder(private val binding: DogListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(dog: Dog) {
-            binding.dogName.text = dog.name
+            with(binding) {
+                dogName.text = dog.name
+
+                Glide.with(dogImg.context)
+                    .load(dog.imageUrl)
+                    .centerCrop()
+                    .into(dogImg)
+            }
+
         }
     }
 }

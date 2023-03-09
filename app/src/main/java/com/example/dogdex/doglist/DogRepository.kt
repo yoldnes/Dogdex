@@ -3,17 +3,21 @@ package com.example.dogdex.doglist
 import com.example.dogdex.Dog
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import com.example.dogdex.R
+import com.example.dogdex.api.DogsApi.retrofitService
+import com.example.dogdex.api.dto.DogDTOMapper
 
 class DogRepository {
 
     suspend fun downloadDogs(): List<Dog> {
         return withContext(Dispatchers.IO) {
-            getFakeDogs()
+            val dogListApiResponse = retrofitService.getAllDogs()
+            val dogDtoList = dogListApiResponse.data.dogs
+            val dogDtoMapper = DogDTOMapper()
+            dogDtoMapper.fromDogDTOListToDogDomainList(dogDtoList)
         }
     }
 
-    private fun getFakeDogs(): MutableList<Dog> {
+    /*private fun getFakeDogs(): MutableList<Dog> {
         val dogList: MutableList<Dog> = mutableListOf()
         dogList.add(
             Dog(
@@ -58,5 +62,5 @@ class DogRepository {
             )
         )
         return dogList
-    }
+    }*/
 }
