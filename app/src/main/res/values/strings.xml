@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Dogdex</string>
+    <string name="error_conexion_message">No hay internet</string>
+    <string name="error_default">Error desconocido</string>
 </resources>
