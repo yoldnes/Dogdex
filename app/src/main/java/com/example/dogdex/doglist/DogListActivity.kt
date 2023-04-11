@@ -1,15 +1,20 @@
 package com.example.dogdex.doglist
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.dogdex.DogDetail.DogDetailActivity
+import com.example.dogdex.DogDetail.DogDetailActivity.Companion.DOG_KEY
 import com.example.dogdex.allDogs
 import com.example.dogdex.api.ApiResponseState
 import com.example.dogdex.databinding.ActivityDogListBinding
 
+private const val GRID_SPAN_COUNT = 3
 class DogListActivity : AppCompatActivity() {
 
     private val dogListViewModel: DogListViewModel by viewModels()
@@ -21,12 +26,18 @@ class DogListActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val recycler = binding.dogRecycler
-        recycler.layoutManager = LinearLayoutManager(this)
+        recycler.layoutManager = GridLayoutManager(this,GRID_SPAN_COUNT)
 
         recycler.adapter = adapter
 
         dogListViewModel.dogList.observe(this) { dogList ->
             adapter.submitList(dogList)
+        }
+
+        adapter.setOnClickListener {
+            val intent = Intent(this, DogDetailActivity::class.java)
+            intent.putExtra(DOG_KEY, it)
+            startActivity(intent)
         }
 
         dogListViewModel.status.observe(this) { status ->
@@ -35,7 +46,7 @@ class DogListActivity : AppCompatActivity() {
                 is ApiResponseState.Success -> binding.progress.visibility = View.GONE
                 is ApiResponseState.Error -> {
                     binding.progress.visibility = View.GONE
-                    Toast.makeText(this,status.messageId,Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, status.messageId, Toast.LENGTH_LONG).show()
                 }
             }
         }
