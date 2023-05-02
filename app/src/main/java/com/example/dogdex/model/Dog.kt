@@ -1,4 +1,4 @@
-package com.example.dogdex
+package com.example.dogdex.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
