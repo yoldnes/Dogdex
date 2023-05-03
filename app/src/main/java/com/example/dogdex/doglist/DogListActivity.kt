@@ -7,10 +7,8 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dogdex.DogDetail.DogDetailActivity
 import com.example.dogdex.DogDetail.DogDetailActivity.Companion.DOG_KEY
-import com.example.dogdex.allDogs
 import com.example.dogdex.api.ApiResponseState
 import com.example.dogdex.databinding.ActivityDogListBinding
 
