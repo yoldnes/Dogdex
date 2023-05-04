@@ -5,10 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.example.dogdex.Dog
+import coil.load
+import com.example.dogdex.model.Dog
 import com.example.dogdex.databinding.DogListItemBinding
-import kotlinx.coroutines.withContext
 
 class DogAdapter : ListAdapter<Dog, DogAdapter.DogViewHolder>(DiffCalback) {
 
@@ -21,6 +20,12 @@ class DogAdapter : ListAdapter<Dog, DogAdapter.DogViewHolder>(DiffCalback) {
             return oldItem === newItem
         }
     }
+
+    private var onItemClickListener : ((Dog) -> Unit)? = null
+    fun setOnClickListener(onItemClickListener : (Dog) -> Unit){
+        this.onItemClickListener= onItemClickListener
+    }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DogViewHolder {
         val binding = DogListItemBinding.inflate(LayoutInflater.from(parent.context))
@@ -36,12 +41,11 @@ class DogAdapter : ListAdapter<Dog, DogAdapter.DogViewHolder>(DiffCalback) {
         RecyclerView.ViewHolder(binding.root) {
         fun bind(dog: Dog) {
             with(binding) {
-                dogName.text = dog.name
 
-                Glide.with(dogImg.context)
-                    .load(dog.imageUrl)
-                    .centerCrop()
-                    .into(dogImg)
+                dogListItemLayout.setOnClickListener {
+                    onItemClickListener?.invoke(dog)
+                }
+                dogImage.load(dog.imageUrl)
             }
 
         }
