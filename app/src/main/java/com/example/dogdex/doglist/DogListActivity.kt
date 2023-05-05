@@ -13,6 +13,7 @@ import com.example.dogdex.api.ApiResponseState
 import com.example.dogdex.databinding.ActivityDogListBinding
 
 private const val GRID_SPAN_COUNT = 3
+
 class DogListActivity : AppCompatActivity() {
 
     private val dogListViewModel: DogListViewModel by viewModels()
@@ -24,12 +25,16 @@ class DogListActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val recycler = binding.dogRecycler
-        recycler.layoutManager = GridLayoutManager(this,GRID_SPAN_COUNT)
+        recycler.layoutManager = GridLayoutManager(this, GRID_SPAN_COUNT)
 
         recycler.adapter = adapter
 
         dogListViewModel.dogList.observe(this) { dogList ->
             adapter.submitList(dogList)
+        }
+
+        adapter.setOnLongClickListener {
+            dogListViewModel.addDogToUser(it.id)
         }
 
         adapter.setOnClickListener {

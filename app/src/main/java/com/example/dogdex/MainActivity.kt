@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.dogdex.Settings.SettingActivity
+import com.example.dogdex.api.ApiServiceInterceptor
 import com.example.dogdex.auth.LoginActivity
 import com.example.dogdex.databinding.ActivityMainBinding
 import com.example.dogdex.doglist.DogListActivity
@@ -34,18 +35,21 @@ class MainActivity : AppCompatActivity() {
 
     private fun validateSession() {
         val user = User.getLoggedInUser(this)
+
         if (user == null) {
             openLogin()
             return
+        } else {
+            ApiServiceInterceptor.setSessionToken(user.authenticationToken)
         }
     }
 
     private fun openDogListActivity() {
-        startActivity(Intent(this@MainActivity, SettingActivity::class.java))
+        startActivity(Intent(this@MainActivity, DogListActivity::class.java))
     }
 
     private fun openSettingActivity() {
-        startActivity(Intent(this@MainActivity, DogListActivity::class.java))
+        startActivity(Intent(this@MainActivity, SettingActivity::class.java))
     }
 
     private fun openLogin() {
