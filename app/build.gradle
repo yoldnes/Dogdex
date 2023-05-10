@@ -46,9 +46,14 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
     implementation "androidx.activity:activity-ktx:1.4.0"
     implementation "com.github.bumptech.glide:glide:4.13.0"
-
+    //navigation
     implementation "androidx.navigation:navigation-fragment-ktx:2.5.3"
     implementation "androidx.navigation:navigation-ui-ktx:2.5.3"
+
+    //camera X
+    implementation "androidx.camera:camera-camera2:1.2.2"
+    implementation "androidx.camera:camera-lifecycle:1.2.2"
+    implementation "androidx.camera:camera-view:1.2.2"
 
     //retrofit
     implementation "com.squareup.retrofit2:retrofit:2.9.0"

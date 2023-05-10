@@ -1,18 +1,29 @@
 package com.example.dogdex.api
 
 import com.example.dogdex.*
+import com.example.dogdex.api.Response.DefaultResponse
 import com.example.dogdex.api.Response.DogListApiResponse
 import com.example.dogdex.api.Response.LoginApiResponse
 import com.example.dogdex.api.Response.SignUpApiResponse
+import com.example.dogdex.api.dto.AddDogToUserDTO
 import com.example.dogdex.api.dto.LoginDTO
 import com.example.dogdex.api.dto.SignUpDTO
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Headers
 import retrofit2.http.POST
 
+private val okHttpClient = OkHttpClient
+    .Builder()
+    .addInterceptor(ApiServiceInterceptor)
+    .build()
+
+
 private val retrofit = Retrofit.Builder()
+    .client(okHttpClient)
     .baseUrl(BASE_URL)
     .addConverterFactory(MoshiConverterFactory.create())
     .build()
@@ -26,6 +37,14 @@ interface ApiService {
 
     @POST(SIGN_IN_URL)
     suspend fun login(@Body loginDTO: LoginDTO): LoginApiResponse
+
+    @Headers("${ApiServiceInterceptor.NEEDS_AUTH_HEADER_KEY}: true")
+    @POST(ADD_DOG_TO_USER)
+    suspend fun addDogToUser(@Body addDogToUserDTO: AddDogToUserDTO): DefaultResponse
+
+    @Headers("${ApiServiceInterceptor.NEEDS_AUTH_HEADER_KEY}: true")
+    @GET(GET_USER_DOGS)
+    suspend fun getUserDogs(): DogListApiResponse
 }
 
 object DogsApi {
