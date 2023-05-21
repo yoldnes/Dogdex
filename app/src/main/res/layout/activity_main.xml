@@ -46,5 +46,12 @@
             android:contentDescription="@string/this_is_settings_buttom"
             android:src="@drawable/baseline_settings" />
 
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone" />
+
     </RelativeLayout>
 </layout>

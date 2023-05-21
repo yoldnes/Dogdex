@@ -33,10 +33,6 @@ class DogListActivity : AppCompatActivity() {
             adapter.submitList(dogList)
         }
 
-        adapter.setOnLongClickListener {
-            dogListViewModel.addDogToUser(it.id)
-        }
-
         adapter.setOnClickListener {
             val intent = Intent(this, DogDetailActivity::class.java)
             intent.putExtra(DOG_KEY, it)

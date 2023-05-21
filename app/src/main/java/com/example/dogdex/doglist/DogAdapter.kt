@@ -30,10 +30,6 @@ class DogAdapter : ListAdapter<Dog, DogAdapter.DogViewHolder>(DiffCalback) {
         this.onItemClickListener = onItemClickListener
     }
 
-    fun setOnLongClickListener(onLongItemClickListener: (Dog) -> Unit) {
-        this.onLongItemClickListener = onLongItemClickListener
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DogViewHolder {
         val binding = DogListItemBinding.inflate(LayoutInflater.from(parent.context))
         return DogViewHolder(binding)
@@ -60,10 +56,6 @@ class DogAdapter : ListAdapter<Dog, DogAdapter.DogViewHolder>(DiffCalback) {
                         onItemClickListener?.invoke(dog)
                     }
                     dogImage.load(dog.imageUrl)
-                    dogListItemLayout.setOnLongClickListener {
-                        onLongItemClickListener?.invoke(dog)
-                        true
-                    }
                 } else {
                     dogImage.visibility = View.GONE
                     dogListItemLayout.background = ContextCompat.getDrawable(
