@@ -7,7 +7,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
-import com.example.dogdex.MainActivity
+import com.example.dogdex.Main.MainActivity
 import com.example.dogdex.R
 import com.example.dogdex.api.ApiResponseState
 import com.example.dogdex.databinding.ActivityLoginBinding
