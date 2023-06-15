@@ -9,7 +9,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        tools:context=".Main.MainActivity">
 
         <androidx.camera.view.PreviewView
             android:id="@+id/containerPreView"
