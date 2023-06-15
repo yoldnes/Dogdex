@@ -30,4 +30,5 @@
     <string name="this_is_settings_buttom">this is settings buttom</string>
     <string name="logout">LOGOUT</string>
     <string name="error_adding_dog">There was an error adding dog to collection</string>
+    <string name="title_activity_dog_detail_compose">DogDetailComposeActivity</string>
 </resources>
